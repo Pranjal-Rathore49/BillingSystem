@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace BillingSystemApp
+﻿namespace BillingSystemApp
 {
     public class Customer
     {
@@ -16,6 +14,7 @@ namespace BillingSystemApp
         public int ClientId { get; set; }
         public decimal TotalPaisa { get; set; }
         public Status BillStatus { get; set; } = Status.Draft;
+
         public void ChangeStatus(Status nayaStatus)
         {
             if (BillStatus == Status.Draft && nayaStatus == Status.Done)
@@ -26,17 +25,6 @@ namespace BillingSystemApp
             {
                 BillStatus = Status.PaisaMilGya;
             }
-        }
-    }
-
-    public class MyDatabase : DbContext
-    {
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Bill> Bills { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-        {
-            options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=BillingDB;Trusted_Connection=True;");
         }
     }
 }
